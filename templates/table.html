@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stocks watchlist</title>
+    <!--<meta http-equiv="refresh" content="360ß" > -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script  type="text/javascript " src="{{ url_for('static', filename='main.js') }}"></script>
+    <script  type="text/javascript " src="{{ url_for('static', filename='sortable.min.js') }}"></script>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  </head>
+ <body>
+<span class="time" id="time"></span>
+<span id="time"></span>
+<span id="message"></span>
+	<div class="container">
+		<table class="sections">
+				<tr>
+				<td class="graph">
+					 {% include "charts.html" %}
+					</td>
+					<td class="section2">
+						<table class="blueTable" data-sortable>
+							<thead>
+								<tr>
+									<th data-sorted="false" >Name</th>
+									<th data-sorted="false" >Ask</th>
+									<th id="sortme" data-sorted="false" >%</th>
+									<th  data-sorted="true" data-sorted-direction="descending" >Chg</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								{% for k,v in data.items() %}
+								<tr class="" id="{{ k }}">
+									<td id="{{k}}_name">{{ k }}</td>
+									<td id="{{k}}_price" class="price">{{ v['price'] }}</td>
+									<td id="{{k}}_pers" class={% if v['changePercent'] > 0 %}"green"{% else %}"red"{% endif %} >{{ v['changePercent']  }}%</td>
+									<td id="{{k}}_chg" class={% if v['change'] > 0 %}"green"{% else %}"red"{% endif %} >{{ v['change'] }}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</td>
+					
+				</tr>
+			</table>
+		</div>
+		<div style="visibility: hidden" id="tickerlist">{{ tickers }}</div>
+</body>
+</html>

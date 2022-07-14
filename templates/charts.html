@@ -1,0 +1,29 @@
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+{% for k,v in data.items() %}
+  <div id="tradingview_{{ k }}" class="absolute"></div>
+  <script type="text/javascript">
+  new TradingView.widget(
+  {
+  "width": 1300,
+  "height": 1000,
+  "symbol": "{{ k }}",
+  "timezone": "America/Los_Angeles",
+  "theme": "dark",
+  "style": "2",
+  "locale": "en",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "hide_top_toolbar": true,
+  "hide_legend": false,
+  "range": "1d",
+  "save_image": false,
+  "hotlist": false,
+  "container_id": "tradingview_{{ k }}"
+}
+  );
+  </script>
+<!--  </div> -->
+ {% endfor %}
+</div>
+<!-- TradingView Widget END -->
